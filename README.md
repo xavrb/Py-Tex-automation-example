@@ -28,14 +28,9 @@ https://fonts.google.com/specimen/Lato
 ```
 
 
-
-<<<<<<< HEAD
+ 
 ## Clone    
-
-
-=======
-## Clone
-
+ 
 ```shell
 git clone https://github.com/xavrb/pyTexBusinessCards
 cd pyTexBusinessCards && cd src
