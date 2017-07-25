@@ -39,7 +39,8 @@ https://fonts.google.com/specimen/Lato
 
 ```shell
 git clone https://github.com/xavrb/pyTexBusinessCards
-cd pyTexBusinessCards
+cd pyTexBusinessCards && cd src
+
 ```
 
 ### Start
