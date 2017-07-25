@@ -37,6 +37,23 @@ cd pyTexBusinessCards && cd src
 
 ```
 
+## Configure
+On /src/config-tex2bc.bcf you can configure your name, title, address, mail and phone. As well as the number of cards you need.
+
+``` 
+%Name: John
+%Lname: Does
+%DegreeDesc: Engineer
+%Address: Westminster, London SW1A 0AA, UK
+%EmailUsername: johndoe
+%EmailDomain: testmail.ch
+%Cellphone: 55233256565
+%Landline: 56465454
+%numberCards: 1500 <-- here you set the number of cards you need
+%template: default <-- working on different templates 
+ 
+```
+
 ### Start
 
 ```shell
