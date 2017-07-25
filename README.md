@@ -15,7 +15,6 @@ I assume you have a working Python and Tex environments working.
 ```shell
 # dnf install texlive-fontspec
 
-# dnf install texlive-labels
 
 ```
 
@@ -63,5 +62,9 @@ On /src/config-tex2bc.bcf you can configure your name, title, address, mail and 
 python pyTexBusinessCards.py
 ```
 
+## Preview
 
+Code generated business cards will look like this:
+
+![businesscard](https://github.com/xavrb/pyTexBusinessCards/blob/master/src/example/image_2017-07-25_18-10-11.png)
 
