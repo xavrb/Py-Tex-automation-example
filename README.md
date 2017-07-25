@@ -38,7 +38,7 @@ cd pyTexBusinessCards && cd src
 ```
 
 ## Configure
-On /src/config-tex2bc.bcf you can configure your name, title, address, mail and phone. As well as the number of cards you need.
+On /src/config-tex2bc.bcf you can configure your name, title, address, mail and phone. As well as the number of pages (10 cards per page) you need.
 
 ``` 
 %Name: John
@@ -49,7 +49,10 @@ On /src/config-tex2bc.bcf you can configure your name, title, address, mail and 
 %EmailDomain: testmail.ch
 %Cellphone: 55233256565
 %Landline: 56465454
-%numberCards: 1500 <-- here you set the number of cards you need
+%numberPages: 15 <-- here you set the number of pages you need (there are 10 cards in each page)
+%cardSize: iso7810 <--	Possible values <|	iso7810 ->	ISO 7810 size: 85.60mm x 53.98mm
+					 |	european ->	European size: 85mm x 55mm
+					 |	us -> 		US size: 3.5 in x 2 in
 %template: default <-- working on different templates 
  
 ```
@@ -61,8 +64,4 @@ python pyTexBusinessCards.py
 ```
 
 
-## Preview
-
-Code generated business cards will look like this:
-![businesscard](https://github.com/xavrb/pyTexBusinessCards/blob/master/src/example/image_2017-07-25_00-09-04.png)
 

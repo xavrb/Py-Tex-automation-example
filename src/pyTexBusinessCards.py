@@ -16,51 +16,83 @@ options = zip(keys, values) # combining keys and values in one nested list
 tex_code = "" # send keys & values to a latex command as constants
 for key, value in options:
     tex_code = tex_code + "\\newcommand{{\\{}}}{{{}}}\n".format(key, value)
-print tex_code
 tex_code = tex_code + """
 
-\\documentclass{article} % din a4, 11 pt, one-sided,
-\\usepackage[newdimens]{labels}
+
+% BUSINESS CARD template
+% created by Karol Koziol (www.karol-koziol.net)
+% for ShareLaTeX - online LaTeX editor (www.sharelatex.com)
+% May 2013
+%edited and powered by xavrb@github.com
+
+
+\\documentclass[10pt]{article}
 \\usepackage{fontspec}
 
 
 \\setmainfont{Lato}
-\\LabelCols=2%
-\\LabelRows=4%
-\\LeftPageMargin=5.0mm%
-\\RightPageMargin=8.0mm%
-\\TopPageMargin=5.0mm%
-\\BottomPageMargin=5.0mm%
-\\InterLabelColumn=0mm%
-\\InterLabelRow=5.0mm%
-\\LeftLabelBorder=5mm%
-\\RightLabelBorder=5mm%
-\\TopLabelBorder=2.0mm%
-\\BottomLabelBorder=2mm%
-\\numberoflabels=\\numberCards%
-\\LabelGridtrue%  <-- or \LabelGridfalse
-\\newcommand{\phonei}{\Cellphone}
-\\newcommand{\phoneii}{\Landline}
-\\newcommand{\emaili}{\EmailUsername}
-%
-\\begin{document}
-\\addresslabel[\\fboxsep=5mm]{%
-    {%
-    \\raggedright%
-    {\\Large \\Name}\\\\[1ex] %NAME
-    {\\Huge \\textbf{\\Lname}}\\\\[1ex] %NAME
-    \\textit{\\DegreeDesc}\\\\ %Degree
-    \\vspace{4ex}
-    \\Address\\\\
-    Contact:\\\\
-    \\hfill{\\small\\textit{\\phonei}}\\\\%
-    \\hfill{\\small\\textit{\\phoneii}}\\\\[2ex]%
-    \\hfill{\\small\\sffamily\\Large{\\textbf{\\emaili}}@\\EmailDomain}%
-    }%
+\\usepackage{graphicx}
+
+\\usepackage{xcolor}
+\\usepackage{tikz}
+\usepackage{ifthen}
+
+\\usepackage{geometry}
+\\geometry{total={210mm,297mm},hmargin=10mm,vmargin=2mm}
+
+\\pagestyle{empty}
+
+%\\renewcommand\\familydefault{\\sfdefault}
+\\usepackage{tgadventor}
+
+
+
+%%% BUSINESS CARD SIZE
+\\newlength{\\cardw}
+\\newlength{\\cardh}
+
+\\ifthenelse{\equal{\cardSize}{iso7810}}{
+    %% ISO 7810 size: 85.60mm x 53.98mm
+    \\setlength{\\cardw}{85.60mm}
+    \\setlength{\\cardh}{53.98mm}
+}{
+\\ifthenelse{\equal{\cardSize}{european}}{
+    %% European size: 85mm x 55mm
+    \\setlength{\\cardw}{85mm}
+    \\setlength{\\cardh}{55mm}
+}{
+\\ifthenelse{\equal{\cardSize}{us}}{
+    %% US size: 3.5 in x 2 in
+    \\setlength{\\cardw}{3.5in}
+    \\setlength{\\cardh}{2in}
+}{
+     }
 }
-%This is a simple test using python and latex (texlive-labels).
-%coded by xavrb
+}
+
+
+
+\\begin{document}
+\\foreach \\z in {0,...,\\numberPages} {\\begin{tikzpicture}
+% grid
+\\foreach \\i in {0,...,5} \\draw[very thin, gray,solid] (0,\\i*\\cardh) -- (2*\\cardw,\\i*\\cardh);
+\\foreach \\j in {0,...,2} \\draw[very thin, gray,solid] (\\j*\\cardw,0) -- (\\j*\\cardw,5*\\cardh);
+% card content
+\\foreach \\i in {0,1} \\foreach \\j in {0,...,4} {
+   \\node at (\\i*\\cardw+0.2\\cardw,\\j*\\cardh+0.5\\cardh) {\\includegraphics[width=0.2\\cardw]{logo}};
+% center text
+   \\node[black!25!gray] at (\\i*\\cardw+0.65\\cardw,\\j*\\cardh+0.75\\cardh) {\\Large{\\Name}\\Huge{\\Lname}};
+   \\node at (\\i*\\cardw+0.65\\cardw,\\j*\\cardh+0.63\\cardh) {\\DegreeDesc};
+      \\node at (\\i*\\cardw+0.65\\cardw,\\j*\\cardh+0.53\\cardh) {\\Address};
+
+   \\node at (\\i*\\cardw+0.65\\cardw,\\j*\\cardh+0.35\\cardh) {\\Cellphone};
+   \\node at (\\i*\\cardw+0.65\\cardw,\\j*\\cardh+0.25\\cardh) {\\Landline};
+   \\node at (\\i*\\cardw+0.65\\cardw,\\j*\\cardh+0.1\\cardh) {\\large{\\EmailUsername} @\\EmailDomain};
+};
+\\end{tikzpicture}
+\\newpage}
 \\end{document}
+
 """
 
 
@@ -73,7 +105,7 @@ if not os.path.exists(build_d):  # create the build directory if not existing
 
 with open(out_file+".tex", "w") as f:  # saves tex_code to output file
     f.write(tex_code)
-
+print "TeX generated!"
 os.system("xelatex -output-directory {} {}".format(os.path.realpath(build_d), os.path.realpath(out_file)))#compiling generated tex
 os.system("xdg-open {}.pdf ".format(os.path.realpath(out_file)))
 print "\n\n===============\nPDF generated, options used: \n" + str(options)
