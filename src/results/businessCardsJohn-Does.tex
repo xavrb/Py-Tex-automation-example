@@ -1,0 +1,54 @@
+\newcommand{\Name}{John}
+\newcommand{\Lname}{Does}
+\newcommand{\DegreeDesc}{Engineer}
+\newcommand{\Address}{Westminster, London SW1A 0AA, UK}
+\newcommand{\EmailUsername}{johndoe}
+\newcommand{\EmailDomain}{testmail.ch}
+\newcommand{\Cellphone}{55233256565}
+\newcommand{\Landline}{56465454}
+\newcommand{\numberCards}{1500}
+\newcommand{\template}{default}
+
+
+\documentclass{article} % din a4, 11 pt, one-sided,
+\usepackage[newdimens]{labels}
+\usepackage{fontspec}
+
+
+\setmainfont{Lato}
+\LabelCols=2%
+\LabelRows=4%
+\LeftPageMargin=5.0mm%
+\RightPageMargin=8.0mm%
+\TopPageMargin=5.0mm%
+\BottomPageMargin=5.0mm%
+\InterLabelColumn=0mm%
+\InterLabelRow=5.0mm%
+\LeftLabelBorder=5mm%
+\RightLabelBorder=5mm%
+\TopLabelBorder=2.0mm%
+\BottomLabelBorder=2mm%
+\numberoflabels=\numberCards%
+\LabelGridtrue%  <-- or \LabelGridfalse
+\newcommand{\phonei}{\Cellphone}
+\newcommand{\phoneii}{\Landline}
+\newcommand{\emaili}{\EmailUsername}
+%
+\begin{document}
+\addresslabel[\fboxsep=5mm]{%
+    {%
+    \raggedright%
+    {\Large \Name}\\[1ex] %NAME
+    {\Huge \textbf{\Lname}}\\[1ex] %NAME
+    \textit{\DegreeDesc}\\ %Degree
+    \vspace{4ex}
+    \Address\\
+    Contact:\\
+    \hfill{\small\textit{\phonei}}\\%
+    \hfill{\small\textit{\phoneii}}\\[2ex]%
+    \hfill{\small\sffamily\Large{\textbf{\emaili}}@\EmailDomain}%
+    }%
+}
+%This is a simple test using python and latex (texlive-labels).
+%coded by xavrb
+\end{document}
