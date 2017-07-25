@@ -54,3 +54,8 @@ python yTexBusinessCards.py
 ```
 
 
+## Preview
+
+Code generated business cards will look like this:
+![businesscard](https://github.com/xavrb/pyTexBusinessCards/blob/master/src/example/image_2017-07-25_00-09-04.png)
+
